@@ -1,0 +1,4 @@
+[APIs Financieras] → [GitHub Actions] → [Google Drive] → [Google Colab] → [MyFXBook Webhook] → [Vintage FX MT5]
+       ↓                    ↓               ↓              ↓                    ↓
+   Datos en tiempo       Recolección     Almacenamiento   Entrenamiento      Ejecución
+      real              automática       de datos         y predicción       de órdenes
