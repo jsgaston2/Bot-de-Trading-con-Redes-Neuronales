@@ -11,7 +11,7 @@ class DriveUploader:
         creds_info = json.loads(credentials_json)
         self.credentials = Credentials.from_service_account_info(creds_info)
         self.service = build('drive', 'v3', credentials=self.credentials)
-        self.folder_id = "YOUR_FOLDER_ID"  # ID de tu carpeta en Drive
+        self.folder_id = "1RHFvpR2Pt_la_PdcTqZgCMYzgfEFldgI"  # ID de tu carpeta en Drive
         
     def upload_file(self, file_path, file_name):
         """Sube archivo a Google Drive"""
