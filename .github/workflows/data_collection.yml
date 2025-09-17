@@ -1,0 +1,29 @@
+# .github/workflows/data_collection.yml
+name: Data Collection
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Cada 15 minutos
+  workflow_dispatch:
+
+jobs:
+  collect-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install dependencies
+        run: |
+          pip install requests pandas yfinance google-api-python-client
+          
+      - name: Collect Market Data
+        run: python scripts/data_collector.py
+        env:
+          GOOGLE_DRIVE_CREDENTIALS: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
+          
+      - name: Upload to Google Drive
+        run: python scripts/upload_to_drive.py
