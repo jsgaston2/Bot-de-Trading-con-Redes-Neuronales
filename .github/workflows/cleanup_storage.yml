@@ -1,0 +1,26 @@
+# .github/workflows/cleanup_storage.yml
+name: Storage Cleanup
+on:
+  schedule:
+    - cron: '0 2 * * 0'  # Cada domingo a las 2 AM
+  workflow_dispatch:
+
+jobs:
+  cleanup-storage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install dependencies
+        run: |
+          pip install google-api-python-client google-auth pandas numpy
+          
+      - name: Run Storage Cleanup
+        run: python scripts/storage_manager.py
+        env:
+          GOOGLE_DRIVE_CREDENTIALS: ${{ secrets.GOOGLE_DRIVE_CREDENTIALS }}
